@@ -41,7 +41,16 @@ class AuthController extends Controller {
         }
     }
 
-    public function login(){
+    public function login(Request $request){
+        $userData = $request->validate([
+            'email' => 'email|required',
+            'password' => 'required'
+        ]);
+        if(!auth()->attempt($userData)) {
+            return response(['message'=>'Invalid credentials']);
+        }
 
+        $accessToken = auth()->user()->createToken('authToken')->accessToken;
+        return response()->json(['student' => auth()->user(),'access_token'=>$accessToken]);
     }
 }
