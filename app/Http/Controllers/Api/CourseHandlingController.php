@@ -13,22 +13,11 @@ use Validator;
 class CourseHandlingController extends Controller {
 
 	public function CoursesList(){
-		$courses = Courses::with('CourseRegistrations')->get();
+		$courses = Courses::all();
 
 		$courses_array[] = array();
 		foreach ($courses as $key => $course) {
-			$course_available = false;
-			if(count($course->CourseRegistrations)){
-				if(count($course->CourseRegistrations) < $course->capacity){
-					$course_available = true;
-				} else{
-					$course_available = false;
-				}
-			} else {
-				$course_available = true;
-			}
-
-
+			$course_available = $this->CourseAvailablity($course->id);
 			$courses_array[$key]['name'] = $course->name; 
 			$courses_array[$key]['course_available'] = $course_available; 
 		}
@@ -54,10 +43,32 @@ class CourseHandlingController extends Controller {
             if($prev_reg) {
             	return response()->json(['User is already register with this course'], 200);
             } else {
-            	$registered_on = $request->registered_on;
-				$registeration = Registration::create($input);
-				return response()->json(['registeration' => $registeration]);
+            	$course = Courses::where('id',$course_id)->first();
+            	$course_available = $this->CourseAvailablity($course->id);
+            	if($course_available) {
+            		$registered_on = $request->registered_on;
+					$registeration = Registration::create($input);
+					return response()->json(['registeration' => $registeration]);
+            	} else {
+					return response()->json(['Course is not available for registration'], 200);
+            	}
             }
         }
+	}
+
+	//check if the course is available for registration
+	private function CourseAvailablity($course_id){
+		$course = Courses::where('id',$course_id)->with('CourseRegistrations')->first();
+		$course_available = false;
+		if(count($course->CourseRegistrations)){
+			if(count($course->CourseRegistrations) < $course->capacity){
+				$course_available = true;
+			} else{
+				$course_available = false;
+			}
+		} else {
+			$course_available = true;
+		}
+		return $course_available;
 	}
 }
