@@ -17,7 +17,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+//Register User Endpoint
 Route::post('/register','Api\AuthController@register');
+//Signin User Endpoint
 Route::post('/login', 'Api\AuthController@login');
+// Route::get('/login', 'Api\AuthController@login');
 
+Route::post('/register-user-course', 'Api\CourseHandlingController@RegisterUserCourse');
+Route::get('/courses-list', 'Api\CourseHandlingController@CoursesList');

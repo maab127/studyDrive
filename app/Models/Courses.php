@@ -9,4 +9,8 @@ class Courses extends Model {
     protected $fillable = [
         'name', 'capacity'
     ];
+
+    public function CourseRegistrations(){
+        return $this->hasMany('App\Models\Registration','course_id');
+    }
 }
