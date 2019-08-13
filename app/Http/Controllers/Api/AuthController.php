@@ -27,7 +27,7 @@ class AuthController extends Controller {
         
         if ($validator->fails()) {    
             return response()->json($validator->messages(), 200);
-        }else{
+        } else{
             $name = $request->name;
             $email = $request->email;
             $password = bcrypt($request->password);
@@ -46,6 +46,7 @@ class AuthController extends Controller {
             'email' => 'email|required',
             'password' => 'required'
         ]);
+        
         if(!auth()->attempt($userData)) {
             return response(['message'=>'Invalid credentials']);
         }
