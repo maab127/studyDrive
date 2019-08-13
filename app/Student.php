@@ -6,11 +6,10 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class Student extends Authenticatable
 {
     use Notifiable,HasApiTokens;
 
-    protected $table ='students';
     /**
      * The attributes that are mass assignable.
      *
