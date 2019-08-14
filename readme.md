@@ -16,7 +16,7 @@ Following are the steps needed to perform to run the project :
 
 ## NOTE: FOR API DOCUMENTATION VISIT THE FOLLOWING URL "https://documenter.getpostman.com/view/8413791/SVYxnF9N?version=latest"
 
-## Whats Remaning
+## Whats Should be done more
 - auth middleware
 - course registration
 - access token usage
