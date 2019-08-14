@@ -11,7 +11,12 @@ Following are the steps needed to perform to run the project :
 - Run migrations e.g php artisan migrate.
 - Run DB seed for dummy courses e.g php artisan db:seed.
 - Run php artisan passport:install.
-- Create server or define a server in host file for artisan serve run the following comman php artisan serve --port=8000.
--Now you can test the api's on http://localhost:8000/api/
+- Create server or define a server in host file.For artisan serve run the following command php artisan serve --port=8000.
+- Now you can test the api's on http://localhost:8000/api/
 
-## NOTE: FOR API DOCUMENTATION VISIT THE FOLLOWING URL
+## NOTE: FOR API DOCUMENTATION VISIT THE FOLLOWING URL "https://documenter.getpostman.com/view/8413791/SVYxnF9N?version=latest"
+
+## Whats Remaning
+- auth middleware
+- course registration
+- access token usage
